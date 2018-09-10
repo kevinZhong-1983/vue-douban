@@ -39,6 +39,7 @@
   import mTabbar from './components/tabbar.vue'
 
 
+
 export default {
   name: 'App',
   data(){
