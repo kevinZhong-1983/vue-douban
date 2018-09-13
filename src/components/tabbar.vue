@@ -25,12 +25,12 @@
     flex-direction: row;
     position: fixed;
     z-index: 9;
-    bottom: 5px;
+    bottom: 0px;
     left: 0;
     right: 0;
     width: 100%;
     overflow: hidden;
-    height: 50px;
+    height: 52px;
     background: #fff;
     &:before {
       content: '';

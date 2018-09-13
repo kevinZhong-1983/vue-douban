@@ -20,15 +20,11 @@
       <m-cell title="热门" label="hot">
 
       </m-cell>
-      <!--<m-cell-media :author="item.target.author.name" :column="item.source_cn" :img="item.target.cover_url" v-for="(item,index) in hotData"-->
-                    <!--:key="item.id">-->
+      <m-cell-media :author="item.target.author.name" :column="item.source_cn" :img="item.target.cover_url" v-for="(item,index) in hotData"
+                    :key="item.id">
 
-        <!--<span slot="title">{{item.title}}</span>-->
-        <!--<span slot="describe">{{item.target.desc}}</span>-->
-      <!--</m-cell-media>-->
-      <m-cell-media author="作者：大象公会" column="来自栏目：广播精选" img="https://img3.doubanio.com/view/photo/albumcover/public/p2518238732.webp">
-        <span slot="title">个人意见：为什么中国没有鲍勃·迪伦这样的民谣歌手</span>
-        <span slot="describe">我们这一代人的成长年代，真正的诗歌课从来都是缺席的。</span>
+        <span slot="title">{{item.title}}</span>
+        <span slot="describe">{{item.target.desc}}</span>
       </m-cell-media>
 
     </div>
@@ -49,6 +45,9 @@
     data() {
       return {
 
+        hotData:[],
+        recommendData: []
+
       }
     },
     components: {
@@ -56,7 +55,44 @@
       mSwipe,
       mCell,
       mCellMedia
+    },
+    created(){
+
+      this.getData()
+
+    },
+    methods:{
+
+      getData() {
+
+        this.axios.get('/api/homeData').then((response) => {
+
+          let data = response.data.data.recommend_feeds;
+          let recommend = [];
+          let hot = [];
+
+          for (var i in data) {
+
+            if (data[i].card && data[i].card.name == '为你推荐') {
+              recommend.push(data[i]);
+            } else {
+
+              hot.push(data[i]);
+            }
+
+          }
+
+          this.recommendData=recommend
+          this.hotData=hot
+
+
+          console.log(response.data)
+        })
+
+      }
+
     }
+
   }
 
 </script>

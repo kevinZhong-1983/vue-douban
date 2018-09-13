@@ -10,6 +10,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+//引入axios
+const express = require('express')
+const app = express()//请求server
+const homeData = require('../src/data/homeData.json')//加载本地数据文件
+const apiRoutes = express.Router()
+app.use('/api', apiRoutes)//通过路由请求数据
+
+
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -22,6 +31,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+
+    //在这里添加一个before方法
+
+    before(app) {
+      app.get('/api/homeData', (req, res) => {
+        res.json({
+          // 这里是你的json内容
+          errno: 0,
+          data: homeData
+        })
+      })
+    },
+
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
