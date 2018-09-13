@@ -1,22 +1,40 @@
 <template>
-    <div class="m-header is-bg is-fixed">
-       <div class="m-header-button is-left">
+    <div class="m-header" :class="{'is-bg':bg,'is-fixed':fixed}">
+       <div class="m-header-button is-left" v-show="leftShow">
          <slot name="left"></slot>
        </div>
-      <h1 class="m-header-title">VUE-DEMO</h1>
+      <h1 class="m-header-title" v-text="title"></h1>
       <div class="m-header-button is-right">
-        <!--<a href="javascript:;">分享</a>-->
         <slot name="right"></slot>
       </div>
 
     </div>
 </template>
 <script type="text/ecmascript-6">
-    export default {
-        data() {
-            return {}
-        }
+  export default {
+    props: {
+      title:
+        {
+          type:String,
+          default: ''
+        },
+      bg: {
+        type:Boolean,
+        default:false
+      },
+      fixed: {
+        type:Boolean,
+        default:false
+      },
+      leftShow: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data() {
+      return {}
     }
+  }
 </script>
 
 <style lang="less">

@@ -1,32 +1,30 @@
 <template>
-    <div class="m-tabbar">
-      <slot></slot>
-    </div>
+  <div class="m-tabbar">
+    <slot></slot>
+  </div>
 </template>
-<script type="text/ecmascript-6">
-
-  import mTabbarItem from './tabbar-item.vue'
-    export default {
-      props:['value'],
-        data() {
-            return {
-
-
-            }
-        },
-      methods:{
-
-
-
-      }
+<script>
+  import mTabbarItem from './tabbar-item';
+  export default {
+    props: ['value'],
+    computed: {
+//      value(){
+//
+//        this.$route.matched[0].name;
+//        //console.log(this.value)
+//      }
     }
+  }
 </script>
-
 <style lang="less">
-  .m-tabbar{
+  /*导入颜色变量*/
+
+  @import "../assets/less/var.less";
+  .m-tabbar {
     display: flex;
     flex-direction: row;
     position: fixed;
+    z-index: 9;
     bottom: 5px;
     left: 0;
     right: 0;
@@ -34,7 +32,16 @@
     overflow: hidden;
     height: 50px;
     background: #fff;
-    border-top: 1px solid #e4e4e4;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      height: 1px;
+      background: @tabbarBorderColor;
+      transform: scaleY(0.5);
+    }
   }
 </style>
 

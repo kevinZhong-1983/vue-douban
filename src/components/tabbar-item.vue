@@ -7,7 +7,15 @@
 </template>
 <script type="text/ecmascript-6">
     export default {
-      props:['id'],//父级传值
+      props: {
+        id:{
+          type:String
+        },
+        isRouter:{
+          type:Boolean,
+          default:false
+        }
+      },
         data() {
             return {
 
@@ -33,6 +41,12 @@
         changePage(){
 
           this.$parent.$emit('chang',this.id)
+          //判断是否为路由跳转
+          if(this.isRouter){
+            //根据id跳转到对应的路由页面
+            this.$router.push(this.id)
+          }
+
 
         }
 
@@ -42,6 +56,7 @@
 </script>
 
 <style lang="less">
+  @import "../assets/less/var.less";
   .m-tabbar-item{
     flex: 1;
     text-align: center;
@@ -52,7 +67,6 @@
         width: 28px;
         height: 28px;
       }
-
     }
     .m-tabbar-item-text{
       display: block;
@@ -61,7 +75,7 @@
     }
     &.is-active{
       .m-tabbar-item-text{
-        color: #42bd56;
+        color: @tabbarActiveColor;
       }
     }
   }
