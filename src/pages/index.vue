@@ -26,6 +26,8 @@
         <span slot="title">{{item.title}}</span>
         <span slot="describe">{{item.target.desc}}</span>
       </m-cell-media>
+      <br>
+      <br>
 
     </div>
 
@@ -69,7 +71,7 @@
 
           let data = response.data.data.recommend_feeds;
           let recommend = [];
-          let hot = [];
+          let hot = [];//为你推荐
 
           for (var i in data) {
 
@@ -85,8 +87,6 @@
           this.recommendData=recommend
           this.hotData=hot
 
-
-          console.log(response.data)
         })
 
       }
