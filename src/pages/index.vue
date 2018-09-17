@@ -86,6 +86,7 @@
 
           this.recommendData=recommend
           this.hotData=hot
+          console.log("///")
 
         })
 
